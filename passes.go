@@ -7,11 +7,11 @@ import (
 
 // Pass represents a pass created by a user in the system
 type Pass struct {
-	ID             int       `json:"id,omitempty" sql:"id,omitempty"`
-	Creator        User      `json:"creator"`
-	Student        string    `json:"student" sql:"student"`
-	CreatedDate    time.Time `json:"created" sql:"created_date"`
-	ExpirationDate time.Time `json:"expiration" sql:"expiration_date"`
+	ID             int       `json:"id,omitempty" form:"id,omitempty" sql:"id,omitempty"`
+	Creator        User      `json:"creator" form:"creator"`
+	Student        string    `json:"student" form:"student" sql:"student"`
+	CreatedDate    time.Time `json:"created" form:"created" sql:"created_date"`
+	ExpirationDate time.Time `json:"expiration" form:"expiration" sql:"expiration_date"`
 }
 
 // PassesService interacts with the pass-related endponits in the API
