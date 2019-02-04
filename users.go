@@ -1,5 +1,7 @@
 package hallpass
 
+import "errors"
+
 // User represents a user in the system
 type User struct {
 	ID        int    `json:"id,omitempty" form:"id,omitempty"`
@@ -33,3 +35,6 @@ type UserListOptions struct {
 	Email string
 	Org   string
 }
+
+// ErrUserNotFound is an error indicating a specified user could not be found
+var ErrUserNotFound = errors.New("user not found")

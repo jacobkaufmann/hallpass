@@ -1,6 +1,9 @@
 package hallpass
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 // Pass represents a pass created by a user in the system
 type Pass struct {
@@ -33,3 +36,6 @@ type PassListOptions struct {
 	ExpiredBeforeTime time.Time
 	ExpiringAfterTime time.Time
 }
+
+// ErrPassNotFound is an error indicating a specified pass could not be found
+var ErrPassNotFound = errors.New("pass not found")
