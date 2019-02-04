@@ -8,7 +8,7 @@ type User struct {
 	FirstName string `json:"first_name" form:"first_name"`
 	LastName  string `json:"last_name" form:"last_name"`
 	Email     string `json:"email" form:"email"`
-	Org       string `json:"organization" form:"organization"`
+	Org       string `json:"org" form:"org"`
 	Passwd    string `json:"passwd,omitempty" form:"passwd,omitempty"`
 }
 
