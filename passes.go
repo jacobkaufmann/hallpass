@@ -14,11 +14,22 @@ type Pass struct {
 // PassesService interacts with the pass-related endponits in the API
 type PassesService interface {
 	// Get a pass
-	Get(id int) *Pass
+	Get(id int) (*Pass, error)
+
+	// List passes
+	List(opt *PassListOptions) ([]*Pass, error)
 
 	// Create a pass
-	Create(p *Pass) bool
+	Create(p *Pass) (bool, error)
 
 	// Update a pass
-	Update(p *Pass) bool
+	Update(p *Pass) (bool, error)
+}
+
+// PassListOptions provide options for retrieving a list of passes
+type PassListOptions struct {
+	GiverEmail        string
+	Student           string
+	ExpiredBeforeTime time.Time
+	ExpiringAfterTime time.Time
 }
