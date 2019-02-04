@@ -7,11 +7,11 @@ import (
 
 // Pass represents a pass created by a user in the system
 type Pass struct {
-	ID             int       `json:"id,omitempty"`
-	Giver          User      `json:"giver"`
-	Student        string    `json:"student"`
-	TimeGiven      time.Time `json:"time_given"`
-	TimeExpiration time.Time `json:"time_expiration"`
+	ID             int       `json:"id,omitempty" sql:"id,omitempty"`
+	Creator        User      `json:"creator"`
+	Student        string    `json:"student" sql:"student"`
+	CreatedDate    time.Time `json:"created" sql:"created_date"`
+	ExpirationDate time.Time `json:"expiration" sql:"expiration_date"`
 }
 
 // PassesService interacts with the pass-related endponits in the API
@@ -31,10 +31,10 @@ type PassesService interface {
 
 // PassListOptions provide options for retrieving a list of passes
 type PassListOptions struct {
-	GiverEmail        string
-	Student           string
-	ExpiredBeforeTime time.Time
-	ExpiringAfterTime time.Time
+	CreatorEmail  string
+	Student       string
+	ExpiredBefore time.Time
+	ExpiringAfter time.Time
 }
 
 // ErrPassNotFound is an error indicating a specified pass could not be found
