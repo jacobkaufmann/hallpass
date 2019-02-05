@@ -7,7 +7,7 @@ import (
 
 // Pass represents a pass created by a user in the system
 type Pass struct {
-	ID             int       `json:"id,omitempty" form:"id,omitempty" sql:"id,omitempty"`
+	ID             int       `json:"id,omitempty" form:"id,omitempty" sql:"id"`
 	Creator        User      `json:"creator" form:"creator"`
 	Student        string    `json:"student" form:"student" sql:"student"`
 	CreatedDate    time.Time `json:"created" form:"created" sql:"created_date"`
