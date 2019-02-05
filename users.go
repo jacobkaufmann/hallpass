@@ -4,7 +4,7 @@ import "errors"
 
 // User represents a user in the system
 type User struct {
-	ID        int    `json:"id,omitempty" form:"id,omitempty" sql:"id"`
+	ID        int64  `json:"id,omitempty" form:"id,omitempty" sql:"user_id"`
 	FirstName string `json:"first_name" form:"first_name" sql:"first_name"`
 	LastName  string `json:"last_name" form:"last_name" sql:"last_name"`
 	Email     string `json:"email" form:"email" sql:"email"`
@@ -15,7 +15,7 @@ type User struct {
 // UsersService interacts with the user-related endpoints in the API
 type UsersService interface {
 	// Get a user
-	Get(id int) (*User, error)
+	Get(id int64) (*User, error)
 
 	// List users
 	List(opt *UserListOptions) ([]*User, error)
@@ -24,7 +24,7 @@ type UsersService interface {
 	Create(u *User) (bool, error)
 
 	// Delete a user
-	Delete(id int) (bool, error)
+	Delete(id int64) (bool, error)
 
 	// Update a user
 	Update(u *User) (bool, error)
