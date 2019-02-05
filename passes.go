@@ -31,10 +31,8 @@ type PassesService interface {
 
 // PassListOptions provide options for retrieving a list of passes
 type PassListOptions struct {
-	CreatorEmail  string
-	Student       string
-	ExpiredBefore time.Time
-	ExpiringAfter time.Time
+	CreatorEmail string
+	Student      string
 }
 
 // ErrPassNotFound is an error indicating a specified pass could not be found
