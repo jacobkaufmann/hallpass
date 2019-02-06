@@ -4,12 +4,12 @@ import "errors"
 
 // User represents a user in the system
 type User struct {
-	ID        int64  `json:"id,omitempty" form:"id,omitempty" sql:"user_id"`
-	FirstName string `json:"first_name" form:"first_name" sql:"first_name"`
-	LastName  string `json:"last_name" form:"last_name" sql:"last_name"`
-	Email     string `json:"email" form:"email" sql:"email"`
-	Org       string `json:"org" form:"org" sql:"org"`
-	Passwd    string `json:"passwd,omitempty" form:"passwd,omitempty" sql:"passwd"`
+	ID        int64  `json:"id,omitempty" form:"id,omitempty" db:"user_id, primarykey, autoincrement"`
+	FirstName string `json:"first_name" form:"first_name" db:"first_name,size:64"`
+	LastName  string `json:"last_name" form:"last_name" db:"last_name,size:64"`
+	Email     string `json:"email" form:"email" db:"email,size:128"`
+	Org       string `json:"org" form:"org" db:"org,size:128"`
+	Passwd    string `json:"passwd,omitempty" form:"passwd,omitempty" db:"passwd"`
 }
 
 // UsersService interacts with the user-related endpoints in the API
