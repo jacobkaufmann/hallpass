@@ -1,6 +1,7 @@
 package datastore
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"sync"
@@ -25,9 +26,17 @@ var connectOnce sync.Once
 func Connect() {
 	connectOnce.Do(func() {
 		setDBCredentialsFromRDSEnv()
+		dataSourceName := fmt.Sprintf(
+			"postgres://%s:%s@%s:%s/%s?sslmode=disable",
+			os.Getenv("PGUSER"),
+			os.Getenv("PGPASSWORD"),
+			os.Getenv("PGHOST"),
+			os.Getenv("PGPORT"),
+			os.Getenv("PGDATABASE"),
+		)
 
 		var err error
-		DB.Dbx, err = sqlx.Open("postgres", "")
+		DB.Dbx, err = sqlx.Open("postgres", dataSourceName)
 		if err != nil {
 			log.Fatal("Error connecting to PostgreSQL database (using PG* environment variables): ", err)
 		}
