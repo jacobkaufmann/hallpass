@@ -11,7 +11,7 @@ import (
 
 type usersStore struct{ *Datastore }
 
-func (s *usersStore) Get(id int) (*hallpass.User, error) {
+func (s *usersStore) Get(id int64) (*hallpass.User, error) {
 	var users []*hallpass.User
 	if err := s.dbh.Select(&users, `SELECT * FROM user WHERE user_id=$1;`, id); err != nil {
 		return nil, err
@@ -74,7 +74,7 @@ func (s *usersStore) Create(u *hallpass.User) (bool, error) {
 	return created, err
 }
 
-func (s *usersStore) Delete(id int) (bool, error) {
+func (s *usersStore) Delete(id int64) (bool, error) {
 	var deleted bool
 
 	u, err := s.Get(id)
