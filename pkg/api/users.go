@@ -27,14 +27,14 @@ func serveUser(c *gin.Context) {
 }
 
 func serveUsers(c *gin.Context) {
-	var opt *hallpass.UserListOptions
+	var opt hallpass.UserListOptions
 
 	if err := c.ShouldBindQuery(&opt); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	users, err := store.Users.List(opt)
+	users, err := store.Users.List(&opt)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -50,13 +50,13 @@ func serveUsers(c *gin.Context) {
 }
 
 func serveCreateUser(c *gin.Context) {
-	var user *hallpass.User
+	var user hallpass.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	_, err := store.Users.Create(user)
+	_, err := store.Users.Create(&user)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -82,13 +82,13 @@ func serveDeleteUser(c *gin.Context) {
 }
 
 func serveUpdateUser(c *gin.Context) {
-	var user *hallpass.User
+	var user hallpass.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	_, err := store.Users.Update(user)
+	_, err := store.Users.Update(&user)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

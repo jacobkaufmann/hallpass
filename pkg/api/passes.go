@@ -28,14 +28,14 @@ func servePass(c *gin.Context) {
 }
 
 func servePasses(c *gin.Context) {
-	var opt *hallpass.PassListOptions
+	var opt hallpass.PassListOptions
 
 	if err := c.ShouldBindQuery(&opt); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	passes, err := store.Passes.List(opt)
+	passes, err := store.Passes.List(&opt)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -52,13 +52,13 @@ func servePasses(c *gin.Context) {
 }
 
 func serveCreatePass(c *gin.Context) {
-	var pass *hallpass.Pass
+	var pass hallpass.Pass
 	if err := c.ShouldBindJSON(&pass); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	_, err := store.Passes.Create(pass)
+	_, err := store.Passes.Create(&pass)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -68,13 +68,13 @@ func serveCreatePass(c *gin.Context) {
 }
 
 func serveUpdatePass(c *gin.Context) {
-	var pass *hallpass.Pass
+	var pass hallpass.Pass
 	if err := c.ShouldBindJSON(&pass); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	_, err := store.Passes.Update(pass)
+	_, err := store.Passes.Update(&pass)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
