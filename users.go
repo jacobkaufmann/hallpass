@@ -32,8 +32,8 @@ type UsersService interface {
 
 // UserListOptions provide options for retrieving a list of users
 type UserListOptions struct {
-	Email string
-	Org   string
+	Email string `url:"email,omitempty"`
+	Org   string `url:"org,omitempty"`
 }
 
 // ErrUserNotFound is an error indicating a specified user could not be found
