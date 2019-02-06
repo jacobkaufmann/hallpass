@@ -9,7 +9,7 @@ import (
 type Pass struct {
 	ID             int64     `json:"id,omitempty" form:"id,omitempty" db:"pass_id, primarykey, autoincrement"`
 	UserID         int64     `json:"user_id" form:"user_id" db:"user_id"`
-	Student        string    `json:"student" form:"student" db:"student,size:64"`
+	Student        string    `json:"student" form:"student" db:"student,size:128"`
 	CreatedDate    time.Time `json:"created" form:"created" db:"created_date"`
 	ExpirationDate time.Time `json:"expiration" form:"expiration" db:"expiration_date"`
 }
