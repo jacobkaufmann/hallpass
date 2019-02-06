@@ -21,8 +21,8 @@ func NewDatastore(dbh modl.SqlExecutor) *Datastore {
 	}
 
 	d := &Datastore{dbh: dbh}
-	// d.Users = &usersStore{d}
-	// d.Passes = &passesStore{d}
+	d.Users = &usersStore{d}
+	d.Passes = &passesStore{d}
 
 	return d
 }
