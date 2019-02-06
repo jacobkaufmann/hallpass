@@ -13,7 +13,7 @@ type usersStore struct{ *Datastore }
 
 func (s *usersStore) Get(id int64) (*hallpass.User, error) {
 	var users []*hallpass.User
-	if err := s.dbh.Select(&users, `SELECT * FROM user WHERE user_id=$1;`, id); err != nil {
+	if err := s.dbh.Select(&users, `SELECT * FROM "user" WHERE user_id=$1;`, id); err != nil {
 		return nil, err
 	}
 	if len(users) == 0 {
@@ -26,7 +26,7 @@ func (s *usersStore) List(opt *hallpass.UserListOptions) ([]*hallpass.User, erro
 	if opt == nil {
 		opt = &hallpass.UserListOptions{}
 	}
-	var sql = `SELECT * FROM user`
+	var sql = `SELECT * FROM "user"`
 
 	var conds []string
 	if opt.Email != "" {
@@ -55,7 +55,7 @@ func (s *usersStore) Create(u *hallpass.User) (bool, error) {
 
 	err := transact(s.dbh, func(tx modl.SqlExecutor) error {
 		var existing []*hallpass.User
-		if err := tx.Select(&existing, `SELECT * FROM user WHERE email=$1 LIMIT 1;`, u.Email); err != nil {
+		if err := tx.Select(&existing, `SELECT * FROM "user" WHERE email=$1 LIMIT 1;`, u.Email); err != nil {
 			return err
 		}
 		if len(existing) > 0 {
