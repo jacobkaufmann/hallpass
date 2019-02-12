@@ -30,7 +30,7 @@ func (s *passesStore) List(opt *hallpass.PassListOptions) ([]*hallpass.Pass, err
 
 	var conds []string
 	if opt.UserID >= 0 {
-		conds = append(conds, "user_id="+strconv.FormatInt(opt.UserID, 10)+"")
+		conds = append(conds, "faculty_id="+strconv.FormatInt(opt.UserID, 10)+"")
 	}
 	if opt.Student != "" {
 		conds = append(conds, "student='"+opt.Student+"'")

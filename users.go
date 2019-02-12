@@ -4,7 +4,7 @@ import "errors"
 
 // User represents a user in the system
 type User struct {
-	ID        int64  `json:"id,omitempty" form:"id,omitempty" db:"user_id, primarykey, autoincrement"`
+	ID        int64  `json:"id,omitempty" form:"id,omitempty" db:"faculty_id, primarykey, autoincrement"`
 	FirstName string `json:"first_name" form:"first_name" db:"first_name,size:64"`
 	LastName  string `json:"last_name" form:"last_name" db:"last_name,size:64"`
 	Email     string `json:"email" form:"email" db:"email,size:128"`
