@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package hallpass;
+
+service FacultyService {
+    rpc AddFaculty(AddFacultyRequest) returns (AddFacultyResponse) {}
+    rpc UpdateFaculty(UpdateFacultyRequest) returns (UpdateFacultyResponse) {}
+    rpc GetFaculty(GetFacultyRequest) returns (Faculty) {}
+    rpc ListFaculty(ListFacultyRequest) returns (stream Faculty) {}
+}
+
+// Faculty represents a member of a school's faculty
+message Faculty {
+    int64 id = 1;
+    string school = 2;
+    string email = 3;
+    string first_name = 4;
+    string last_name = 5;
+}
+
+message AddFacultyRequest {
+    string school = 1;
+    string email = 2;
+    string first_name = 3;
+    string last_name = 4;
+}
+
+message AddFacultyResponse {
+    bool added = 1;
+    string message = 2;
+}
+
+message UpdateFacultyRequest {
+    string school = 1;
+    string email = 2;
+    string first_name = 3;
+    string last_name = 4;
+}
+
+message UpdateFacultyResponse {
+    bool updated = 1;
+    string message = 2;
+}
+
+message GetFacultyRequest {
+    int64 id = 1;
+    string email = 2;
+}
+
+message ListFacultyRequest {
+    string school = 1;
+    string email = 2;
+    string first_name = 3;
+    string last_name = 4;
+}

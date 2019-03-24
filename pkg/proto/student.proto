@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package hallpass;
+
+service StudentService {
+    rpc AddStudent(AddStudentRequest) returns (AddStudentResponse) {}
+    rpc UpdateStudent(UpdateStudentRequest) returns (UpdateStudentResponse) {}
+    rpc GetStudent(GetStudentRequest) returns (Student) {}
+    rpc ListStudents(ListStudentsRequest) returns (stream Student) {}
+}
+
+// Student represents a student at a school
+message Student {
+    int64 id = 1;
+    string school = 2;
+    string first_name = 3;
+    string last_name = 4;
+}
+
+message AddStudentRequest {
+    string school = 1;
+    string first_name = 2;
+    string last_name = 3;
+}
+
+message AddStudentResponse {
+    bool added = 1;
+    string message = 2;
+}
+
+message UpdateStudentRequest {
+    string school = 1;
+}
+
+message UpdateStudentResponse {
+    bool updated = 1;
+    string message = 2;
+}
+
+message GetStudentRequest {
+    int64 id = 1;
+}
+
+message ListStudentsRequest {
+    string school = 1;
+    string first_name = 2;
+    string last_name = 3;
+}

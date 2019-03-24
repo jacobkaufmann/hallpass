@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package hallpass;
+
+import "google/protobuf/timestamp.proto";
+
+
+service PassService {
+    rpc CreatePass(CreatePassRequest) returns (CreatePassResponse) {}
+    rpc UpdatePass(UpdatePassRequest) returns (UpdatePassResponse) {}
+    rpc GetPass(GetPassRequest) returns (Pass) {}
+    rpc ListPasses(ListPassesRequest) returns (stream Pass) {}
+}
+
+// Pass represents an electronic pass to be at a location for a specified time window
+message Pass {
+    int64 id = 1;
+    int64 faculty_id = 2;
+    int64 student_id = 3;
+    string location = 4;
+    google.protobuf.Timestamp creation_date = 5;
+    google.protobuf.Timestamp expiration_date = 6;
+}
+
+message CreatePassRequest {
+    int64 faculty_id = 1;
+    int64 student_id = 2;
+    string location = 3;
+    google.protobuf.Timestamp expiration_date = 4;
+}
+
+message CreatePassResponse {
+    bool created = 1;
+    string message = 2;
+}
+
+message UpdatePassRequest {
+    int64 id = 1;
+    google.protobuf.Timestamp expiration_date = 2;
+}
+
+message UpdatePassResponse {
+    bool updated = 1;
+    string message = 2;
+}
+
+message GetPassRequest {
+    int64 id = 1;
+}
+
+message ListPassesRequest {
+    int64 faculty_id = 1;
+    int64 student_id = 2;
+    string location = 3;
+    google.protobuf.Timestamp creation_date = 4;
+    google.protobuf.Timestamp expiration_date = 5;
+}
